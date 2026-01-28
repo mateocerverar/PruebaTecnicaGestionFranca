@@ -5,7 +5,7 @@ Solución Fullstack implementando arquitectura de Microservicios con **.NET 8** 
 ## Arquitectura
 El sistema consta de 3 microservicios independientes y un frontend desacoplado.
 
-### Backend (.NET 8)
+### Backend (.NET 9)
 *   **Users.API** (Puerto 5001): Gestión de usuarios y "Login" simulado (roles).
 *   **Orders.API** (Puerto 5002): Gestión de pedidos. Publica eventos `OrderCreated`.
 *   **Payments.API** (Puerto 5003): Procesa pagos. Consume eventos `OrderCreated` vía RabbitMQ.
@@ -16,7 +16,7 @@ El sistema consta de 3 microservicios independientes y un frontend desacoplado.
 *   MassTransit (RabbitMQ)
 *   DDD (Capas: Domain, Features/Application, Infrastructure)
 
-### Frontend (Angular 18)
+### Frontend (Angular 21)
 *   **Tema Pokémon**: Diseño visual basado en la franquicia Pokémon (PokeAPI).
 *   **Tecnologías**: Standalone Components, Signals (parcial), CSS Variables, HttpClient.
 *   **Login Simulado**:
