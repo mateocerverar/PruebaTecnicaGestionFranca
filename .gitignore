@@ -1,0 +1,14 @@
+bin/
+obj/
+**/bin/
+**/obj/
+node_modules/
+.idea/
+.vscode/
+.vs/
+**/.vs/
+*.log
+dist/
+coverage/
+.DS_Store
+.env
