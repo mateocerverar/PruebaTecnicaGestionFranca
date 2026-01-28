@@ -62,6 +62,4 @@ Para levantar todo el entorno (Infraestructura + Backend + Frontend):
 <img width="1175" height="838" alt="image" src="https://github.com/user-attachments/assets/28603804-7e14-4fdd-bc10-98b36cf264d2" />
 
 ## Enlace a API publica
-   ```
-    https://pokeapi.co/api/v2/
-    ```
+   `https://pokeapi.co/api/v2/`
