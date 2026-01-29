@@ -52,6 +52,37 @@ Para levantar todo el entorno (Infraestructura + Backend + Frontend):
 
 ## Decisiones técnicas
 
+### 1. Backend: Implementación de RabbitMQ
+
+Se eligió **RabbitMQ** como Message Broker por las siguientes razones:
+- **Desacoplamiento Real**: Permite que `Orders.API` envíe eventos sin conocer la existencia de `Payments.API`. Si el servicio de pagos cae, los mensajes persisten en la cola hasta que se recupera.
+- **Estándar de Industria**: Es el broker más maduro y soportado en el ecosistema .NET, especialmente fácil de integrar mediante **MassTransit**.
+- **Escalabilidad**: Facilita agregar nuevos consumidores en el futuro sin modificar el servicio de órdenes.
+### 2. Estructura de Proyecto: "Monorepo" en una Solución
+Aunque son microservicios, se agruparon en una única solución `.sln` (`backend/`) porque:
+- **Facilidad de Desarrollo**: Permite depurar múltiples servicios simultáneamente en Visual Studio / VS Code.
+- **Shared Kernel**: Facilita compartir código común sin la sobrecarga de gestionar paquetes NuGet privados.
+- **Orquestación**: Simplifica la configuración de `docker-compose` al tener contextos de build relativos conocidos.
+### 3. Uso de PokeAPI
+Se utilizó la **PokeAPI** en el Frontend para:
+- **Simular Integración Externa**: Demostrar cómo el frontend puede consumir datos de APIs públicas de terceros totalmente ajenas al backend corporativo.
+- **Temática Visual**: Proveer una fuente de datos.
+### 4. Estructura de Microservicios (Clean Architecture / DDD)
+Cada microservicio (`Users`, `Orders`, `Payments`) sigue una estructura interna consistente:
+- **API (Controllers)**: Sola entrada HTTP.
+- **Features (Application)**: Implementación de casos de uso usando **CQRS** (Command Query Responsibility Segregation) con la librería **MediatR**. Esto aísla la lógica de negocio de los controladores.
+- **Domain**: Entidades puras y objetos de valor.
+- **Infrastructure**: Implementación de base de datos (`DbContext`) y configuraciones de bus.
+*Justificación*: Esta separación asegura que la complejidad de la infraestructura no contamine la lógica de negocio.
+### 5. Arquitectura Frontend (Angular)
+- **Componentes Standalone**: Se utilizó para reducir el "boilerplate" de los `NgModules`.
+- **Organización por Features**: (`/features/dashboard`, `/features/trainers`) en lugar de por tipo de archivo. Esto hace que el proyecto sea más navegable y escalable.
+- **CSS Variables**: Se usaron variables nativas (`var(--pk-blue)`) para manejar el **Modo Oscuro** .
+### 6. Otras Decisiones Relevantes
+- **MassTransit**: Se usó como capa de abstracción sobre RabbitMQ. Esto elimina la complejidad de manejar conexiones "raw", reintentos y topología de colas manualmente.
+- **Docker Compose**: Unifica la ejecución. Con un solo comando se levanta toda la infraestructura.
+- **EF Core In-Memory**: Se eligió para la demostración para evitar pre-requisitos de instalación de SQL Server/Postgres.
+  
 ## Capturas de pantalla del frontend
 <img width="857" height="620" alt="image" src="https://github.com/user-attachments/assets/55b43ddf-7b9b-45b3-9c42-d3ebf55dc4b3" />
 <img width="1179" height="820" alt="image" src="https://github.com/user-attachments/assets/ea16220b-4c05-4a36-a8ea-370f60ea8dec" />
