@@ -1,6 +1,6 @@
 # Prueba Técnica - Gestión Franca (Microservicios & Frontend Pokémon)
 
-Solución Fullstack implementando arquitectura de Microservicios con **.NET 8** y Frontend en **Angular 18+** con temática de **Pokémon**, demostrando patrones CQRS, DDD y Event-Driven Architecture.
+Solución Fullstack implementando arquitectura de Microservicios con **.NET 9** y Frontend en **Angular 21** con temática de **Pokémon**, demostrando patrones CQRS, DDD y Event-Driven Architecture.
 
 ## Arquitectura
 El sistema consta de 3 microservicios independientes y un frontend desacoplado.
